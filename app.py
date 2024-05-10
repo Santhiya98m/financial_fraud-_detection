@@ -13,7 +13,7 @@ app = FastAPI(
     version="1.0.0", debug=True)
 
 
-model = joblib.load('credit_fraud.pkl')
+model = joblib.load('frauddetection.pkl')
 
 @app.get("/", response_class=PlainTextResponse)
 async def running():
@@ -44,7 +44,7 @@ class fraudDetection(BaseModel):
 def predict(data : fraudDetection):
                                                                                                                                                                                                                                 
     features = np.array([[data.step, data.types, data.amount, data.oldbalanceorig, data.newbalanceorig, data.oldbalancedest, data.newbalancedest, data.isflaggedfraud]])
-    model = joblib.load('credit_fraud.pkl')
+    model = joblib.load('frauddetection.pkl')
 
     predictions = model.predict(features)
     if predictions == 1:
